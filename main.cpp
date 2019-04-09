@@ -25,10 +25,15 @@ void userInteraction(){
 
     while (true) {
         cout << "Select an option below\n";
-        cout << " 1. Check scale\n 2. Room Occupancy\n 0. To exit\n";
-
+        cout << " 1 => Check scale\n 2 => Room Occupancy\n 0 => To exit\n";
+        
+        cout << "Enter an option: ";
         cin >> mainMenuChoice;
-        while(mainMenuChoice  < 0 or mainMenuChoice > 2){
+        
+        while(cin.fail() or mainMenuChoice  < 0 or mainMenuChoice > 2){
+            cin.clear();
+	        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Check your option and enter the correct option: ";
             cin >> mainMenuChoice;
         }
 
@@ -38,36 +43,45 @@ void userInteraction(){
         }
             switch (mainMenuChoice) {
                 case 1:
-                    cout << "Select Scale\n 1. Temperature Scale\n 2. Humidity Scale\n 3. Water PH Level Scale\n";
+                    cout << "\n--------------------------------------\n";
+                    cout << "Select Scale\n 1 => Temperature Scale\n 2 => Humidity Scale\n 3 => Water PH Level Scale\n 0 => Main menu\n";
+                    cout << "Enter an option: ";
                     cin >> scaleChoice;
-                    while(scaleChoice  < 1 or scaleChoice > 3){
+                    while(cin.fail() or scaleChoice  < 0 or scaleChoice > 3){
+                        cin.clear();
+	                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                        cout << "Enter the correct option: ";
                         cin >> scaleChoice;
                     }
 
                     switch (scaleChoice) {
                         case 1:
-                            cout << "Input Temperature Value: \n";//input temperature value
+                            cout << "Input Temperature Value: ";//input temperature value
                             cin >> temperature;
                              while(temperature >58 || temperature < -89.2){
-                                 cout << "\nPlease inputted temperature value should be between 58 and -89.2\n";
-                                    cin >> temperature;
+                                cout << "\nPlease inputted temperature value should be between 58 and -89.2\n";
+                                cout << "Enter a new value: ";
+                                cin >> temperature;
                             }
 
-                            cout << "Input Temperature Unit [F/C]: \n";//input temperature unit
+                            cout << "Input Temperature Unit [F/C]: ";//input temperature unit
                             char tempUnit;
                             cin >> tempUnit;
                             cout << tempUnit;
-                            while(cin.fail() || (tempUnit != 'F' && tempUnit != 'C' && tempUnit != 'c' && tempUnit != 'C')){
-                                cout << "Input F or C:  \n";
+                            while(cin.fail() || (tempUnit != 'F' && tempUnit != 'C' && tempUnit != 'c' && tempUnit != 'f')){
+                                cin.clear();
+	                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                                cout << "Input F or C: ";
                                 cin >> tempUnit;
                             }
                             temperatureUnit.push_back(tempUnit);
                             a.setTemperature(temperature, temperatureUnit);
                             cout << "The temperature is " << a.temperatureScale() << "\n";
+                            cout << "\n----------------------------\n";
                             break;
 
                         case 2:
-                            cout << "Input Relative Humidity Value: \n";//input relative humidity
+                            cout << "Input Relative Humidity Value: ";//input relative humidity
                             cin >> relativeHumidity;
                             while(relativeHumidity >100 || relativeHumidity < 0){
                                 cout << "Please inputted relative humidity value should be from 0 and 100\n";
@@ -80,37 +94,56 @@ void userInteraction(){
                             cout << "Input Water PH Value: \n";//input ph value
                             cin >> waterPH;
                             while(waterPH >14 || waterPH < 0){
-                                cout << "\nPlease inputted water PH value should be from 0 and 14";
+                                cout << "\nPlease inputted water PH value should be from 0 and 14: ";
                                 cin >> waterPH;
                             }
                             a.waterPHLevel = waterPH;
                             cout << "The Water is " << a.waterPHLevelScale() << "\n";
                             break;
+                        case 0:
+                            cout << "\n----------------------------\n";
+                            break;
                         default:
+                            cout << "\n----------------------------\n";
                             break;
                     }
 
                     break;
 
                 case 2:
-//NEXT ONEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+                         cout << "\n----------------------------\n";
                     cout
-                            << "Select an action\n 1. Add person to room\n 2. Remove person from room\n 3. Check for space\n";
+                            << "Select an action\n 1 => Add person to room\n 2 => Remove person from room\n 3 => Check for space\n 0 => Main menu\n";
+                    cout << "Select an option: ";
                     cin >> spaceCheck;
-                    while(spaceCheck  < 1 or spaceCheck > 3){
+                    while(cin.fail() or spaceCheck  < 0 or spaceCheck > 3){
+                        cin.clear();
+	                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+	                    cout << "Enter a correct option: ";
                         cin >> spaceCheck;
                     }
 
                     switch (spaceCheck) {
+                        case 0:
+                            cout << "\n----------------------------\n";
+                            break;
                         case 1 :
+                            cout << "\n----------------------------\n";
                             cout
-                                    << "Select room to add person\n 1. Lecture Hall\n 2. BigBen\n 3. Akorno\n 4. Library\n 5. Car Park\n 6. Washroom\n";
+                                    << "Select room to add person\n 1 => Lecture Hall\n 2 => BigBen\n 3 => Akorno\n 4 => Library\n 5 => Car Park\n 6 => Washroom\n 0 => Main menu\n" ;
+                            cout << "Select an option: ";
                             cin >> roomAddChoice;
-                            while(roomAddChoice < 1 or roomAddChoice > 6){
+                            while(cin.fail() or roomAddChoice < 0 or roomAddChoice > 6){
+                                cin.clear();
+	                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+	                            cout << "Enter a correct option: ";
                                 cin >> roomAddChoice;
                             }
                             //This switch case adds data to the various sectors like lecture hall, big ben queue etc
                             switch (roomAddChoice) {
+                                case 0:
+                                    cout << "\n----------------------------\n";
+                                    break;
                                 case 1:
                                     if (a.addpersonToLectureHall()) {
                                         cout << "Person added\n";
@@ -142,18 +175,27 @@ void userInteraction(){
                                     }
                                     break;
                                 default:
+                                    cout << "\n----------------------------\n";
                                     break;
                             }
                             break;
                         case 2:
+                            cout << "\n----------------------------\n";
                             cout
-                                    << "Select room to remove person\n 1. Lecture Hall\n 2. BigBen\n 3. Akorno\n 4. Library\n 5. Car Park\n 6. Washroom\n";
+                                    << "Select room to remove person\n 1 => Lecture Hall\n 2 => BigBen\n 3 => Akorno\n 4 => Library\n 5 => Car Park\n 6 => Washroom\n 0 => Main menu\n";
+                            cout << "Select an option: ";
                             cin >> roomRemoveChoice;
-                            while(roomRemoveChoice < 1 or roomRemoveChoice > 6){
+                            while(cin.fail() or roomRemoveChoice < 0 or roomRemoveChoice > 6){
+                                cin.clear();
+	                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+	                            cout << "Enter a correct option: ";
                                 cin >> roomRemoveChoice;
                             }
                             //removes data from sectors on campus
                             switch (roomRemoveChoice) {
+                                case 0:
+                                cout << "\n----------------------------\n";
+                                    break;
                                 case 1:
                                     if (a.removePersonFromLectureHall()) {
                                         cout << "Person removed\n\n";
@@ -185,18 +227,27 @@ void userInteraction(){
                                     }
                                     break;
                                 default:
+                                    cout << "\n----------------------------\n";
                                     break;
                             }
                             break;
                             //outputs available spaces
                         case 3:
+                            cout << "\n----------------------------\n";
                             cout
-                                    << "Check for space in \n 1. Lecture Hall\n 2. BigBen\n 3. Akorno\n 4. Library\n 5. Car Park\n 6. Washroom\n";
+                                    << "Check for space in \n 1 => Lecture Hall\n 2 => BigBen\n 3 => Akorno\n 4 => Library\n 5 => Car Park\n 6 => Washroom\n 0 => Main menu\n";
+                            cout << "Select an option: ";
                             cin >> roomCheckChoice;
-                            while(roomCheckChoice < 1 or roomCheckChoice > 6){
+                            while(cin.fail() or roomCheckChoice < 0 or roomCheckChoice > 6){
+                                cin.clear();
+	                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+	                            cout << "Enter a correct option: ";
                                 cin >> roomCheckChoice;
                             }
                             switch (roomCheckChoice) {
+                                case 0:
+                                    cout << "\n----------------------------\n";
+                                    break;
                                 case 1:
                                     cout << "The space available in Lecture Hall is " << a.spaceAvailableInLectureHall()
                                          << " out of " << a.lectureHallSize << "\n\n";
@@ -226,6 +277,7 @@ void userInteraction(){
                             }
                             break;
                         default:
+                            cout << "\n----------------------------\n";
                             break;
                     }
 
@@ -236,6 +288,8 @@ void userInteraction(){
         }
 
     }
+
+
 
 
 int main()

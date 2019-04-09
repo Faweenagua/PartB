@@ -7,6 +7,7 @@
 #define ICPLAB6_ASHESIASALIVINGLAB_H
 #include<algorithm>
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -29,6 +30,8 @@ public:
     int numberOfPeopleAtAkorno = 0;     //people at Arkornor
     const int parkingSize = 28;         //carrying capacity of car parks
     int numberOfCarsParked = 0;         //number of cars parked
+   // vector<int> packingList ()
+    
 
 
 
